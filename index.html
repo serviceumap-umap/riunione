@@ -7,12 +7,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>KO Report</title>
 <style>
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 300;
-  src: url(data:font/woff2;base64,d09GMgABAAAAAPUgABQAAAACTcQAAPSoAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGpQ2G4GCAByMSj9IVkFSlR8/TVZBUoE+BmA/U1RBVIIiJ0gAhQwvgSQRCAqBgSjmQwuEHgAwhrRmATYCJAOIOAQgBYd0B4k4W+U8ckNUkTnrQOkPto5o5r1IbZZyjkpkeE8sUHOI8RDoC9rFNTI7EMPGAWBr5EHZ//9/ctIYY21XvwMARDW11D5tuVshBgR2ck+5xCQkVLUYMcSSc2odGeNYzTxNpfigNgsxJIUlUIDkhTrUH3gNZqTiToOQxza81iSeNg9CgCCIxWKxjN3JIax6K0V4cXy6jEbTQRtO+PqU9Ie2yS3HZS1/pn4XOcsa0P+/ETrh9ptDoTLHLRlje3Q62uL74Ushd4cK3vGXse74GD6iiX1t1mEnmct1Yy/XMrOqrzV+P547ZhqtZYuOHWk1u1npx9NG7emXMT...) format('woff2');
-}
 :root {
 --bg: #f0f2f5;
 --surface: #ffffff;
@@ -26,639 +20,366 @@
 --header-bg: #1a2340;
 --header-text: #ffffff;
 --mono: monospace;
---sans: 'DM Sans', sans-serif;
+--sans: system-ui, sans-serif;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; appearance: none; }
-body {
-background: var(--bg);
-color: var(--text);
-font-family: var(--sans);
-min-height: 100vh;
-overflow-x: hidden;
-}
-/* HEADER */
-.header {
-background: var(--header-bg);
-border-bottom: none;
-padding: 16px 20px 12px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-position: sticky;
-top: 0;
-z-index: 100;
-}
+body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+.header { background: var(--header-bg); padding: 16px 20px 12px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
 .header-left { display: flex; flex-direction: column; }
-.header-title {
-font-family: var(--mono);
-font-size: 18px;
-font-weight: 700;
-letter-spacing: -0.5px;
-color: #ffffff;
-}
-.header-sub {
-font-size: 11px;
-color: rgba(255,255,255,0.55);
-letter-spacing: 1.5px;
-text-transform: uppercase;
-margin-top: 2px;
-}
+.header-title { font-family: var(--mono); font-size: 18px; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+.header-sub { font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
 .header-actions { display: flex; gap: 8px; }
-.btn-icon {
-background: rgba(255,255,255,0.12);
-border: 1px solid rgba(255,255,255,0.2);
-border-radius: 8px;
-width: 38px; height: 38px;
-display: flex; align-items: center; justify-content: center;
-cursor: pointer;
-color: rgba(255,255,255,0.8);
-font-size: 16px;
-transition: all 0.15s;
-}
+.btn-icon { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: rgba(255,255,255,0.8); font-size: 16px; transition: all 0.15s; }
 .btn-icon:active { background: rgba(255,255,255,0.2); transform: scale(0.95); }
 .btn-icon.danger { color: #ff8a80; }
-/* DATE BADGE */
-.date-strip {
-background: var(--surface2);
-border-bottom: 1px solid var(--border);
-padding: 8px 20px;
-display: flex;
-align-items: center;
-gap: 8px;
-}
+.date-strip { background: var(--surface2); border-bottom: 1px solid var(--border); padding: 8px 20px; display: flex; align-items: center; gap: 8px; }
 .date-label { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
 .date-value { font-family: var(--mono); font-size: 12px; color: var(--accent); }
 .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--border); }
-/* TABLE HEADER */
-.table-head {
-display: grid;
-grid-template-columns: 64px 72px 1fr;
-gap: 1px;
-background: var(--border);
-border-bottom: 2px solid var(--accent);
-margin: 0;
-}
-.th {
-background: var(--header-bg);
-padding: 10px 12px;
-font-size: 10px;
-font-weight: 600;
-letter-spacing: 1.5px;
-text-transform: uppercase;
-color: rgba(255,255,255,0.6);
-}
-/* ROWS */
+.table-head { display: grid; grid-template-columns: 64px 72px 1fr; gap: 1px; background: var(--border); border-bottom: 2px solid var(--accent); }
+.th { background: var(--header-bg); padding: 10px 12px; font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
 .rows-container { padding-bottom: 100px; }
-.row-item {
-display: grid;
-grid-template-columns: 64px 72px 1fr;
-gap: 1px;
-background: var(--border);
-border-bottom: 1px solid var(--border);
-transition: all 0.1s;
-}
-.row-item:active { opacity: 0.85; }
-.cell {
-background: var(--surface);
-padding: 14px 12px;
-display: flex;
-align-items: center;
-}
-.cell-label {
-font-family: var(--mono);
-font-size: 15px;
-font-weight: 700;
-color: var(--text);
-}
-/* KO CELL */
-.cell-ko {
-background: var(--surface);
-padding: 0;
-display: flex;
-align-items: stretch;
-}
-.ko-input {
-width: 100%;
-background: transparent;
-border: none;
-outline: none;
-color: var(--accent);
-font-family: var(--mono);
-font-size: 20px;
-font-weight: 700;
-text-align: center;
-padding: 14px 8px;
--webkit-appearance: none;
-appearance: none;
-cursor: pointer;
-}
+.row-item { display: grid; grid-template-columns: 64px 72px 1fr; gap: 1px; background: var(--border); border-bottom: 1px solid var(--border); }
+.cell { background: var(--surface); padding: 14px 12px; display: flex; align-items: center; }
+.cell-label { font-family: var(--mono); font-size: 15px; font-weight: 700; color: var(--text); }
+.cell-ko { background: var(--surface); padding: 0; display: flex; align-items: stretch; }
+.ko-input { width: 100%; background: transparent; border: none; outline: none; color: var(--accent); font-family: var(--mono); font-size: 20px; font-weight: 700; text-align: center; padding: 14px 8px; -webkit-appearance: none; appearance: none; cursor: pointer; }
 .ko-input::placeholder { color: #c8ccd8; font-size: 14px; }
 .ko-input:focus { background: rgba(214,59,47,0.06); }
-/* NOTE CELL */
-.cell-notes {
-background: var(--surface);
-padding: 12px 12px;
-cursor: pointer;
-position: relative;
-min-height: 52px;
-display: flex;
-align-items: center;
-}
+.cell-notes { background: var(--surface); padding: 12px 12px; cursor: pointer; position: relative; min-height: 52px; display: flex; align-items: center; }
 .cell-notes:active { background: var(--surface2); }
-.notes-preview {
-font-size: 12px;
-color: var(--text-dim);
-line-height: 1.5;
-flex: 1;
-}
+.notes-preview { font-size: 12px; color: var(--text-dim); line-height: 1.5; flex: 1; }
 .notes-preview.has-notes { color: var(--text); }
-.bullet-item {
-display: flex;
-align-items: flex-start;
-gap: 6px;
-margin-bottom: 2px;
-}
-.bullet-dot {
-width: 4px; height: 4px;
-border-radius: 50%;
-background: var(--accent);
-margin-top: 6px;
-flex-shrink: 0;
-}
-.notes-count {
-position: absolute;
-top: 8px; right: 10px;
-background: var(--accent);
-color: var(--bg);
-font-size: 9px;
-font-weight: 700;
-font-family: var(--mono);
-border-radius: 20px;
-padding: 1px 6px;
-min-width: 18px;
-text-align: center;
-}
-.add-note-hint {
-display: flex; align-items: center; gap: 6px;
-color: #b0b8cc;
-font-size: 12px;
-}
+.bullet-item { display: flex; align-items: flex-start; gap: 6px; margin-bottom: 2px; }
+.bullet-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+.notes-count { position: absolute; top: 8px; right: 10px; background: var(--accent); color: var(--bg); font-size: 9px; font-weight: 700; font-family: var(--mono); border-radius: 20px; padding: 1px 6px; min-width: 18px; text-align: center; }
+.add-note-hint { display: flex; align-items: center; gap: 6px; color: #b0b8cc; font-size: 12px; }
 .add-note-hint span { font-size: 16px; }
-/* MODAL */
-.modal-overlay {
-position: fixed; inset: 0;
-background: rgba(0,0,0,0.75);
-z-index: 200;
-display: flex;
-align-items: center;
-justify-content: flex-end;
-opacity: 0;
-pointer-events: none;
-transition: opacity 0.2s;
-backdrop-filter: blur(4px);
--webkit-backdrop-filter: blur(4px);
-}
-.modal-overlay.open {
-opacity: 1;
-pointer-events: all;
-}
-.modal {
-background: var(--surface);
-border-radius: 20px 20px 0 0;
-border-top: 1px solid var(--border);
-width: 100%;
-max-height: 90vh;
-display: flex;
-flex-direction: column;
-transform: translateY(100%);
-transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-}
-.modal-overlay.open .modal {
-transform: translateY(0);
-}
-.modal-handle {
-width: 36px; height: 4px;
-background: var(--border);
-border-radius: 2px;
-margin: 12px auto 0;
-}
-.modal-header {
-padding: 16px 20px 12px;
-border-bottom: 1px solid var(--border);
-display: flex;
-align-items: center;
-justify-content: space-between;
-}
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 200; display: flex; align-items: flex-end; opacity: 0; pointer-events: none; transition: opacity 0.2s; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal { background: var(--surface); border-radius: 20px 20px 0 0; border-top: 1px solid var(--border); width: 100%; max-height: 90vh; display: flex; flex-direction: column; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1); }
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 12px auto 0; }
+.modal-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
 .modal-title-wrap { display: flex; flex-direction: column; }
-.modal-label {
-font-family: var(--mono);
-font-size: 20px;
-font-weight: 700;
-color: var(--accent);
-}
-.modal-subtitle {
-font-size: 11px;
-color: var(--text-dim);
-letter-spacing: 1px;
-text-transform: uppercase;
-margin-top: 2px;
-}
-.modal-close {
-background: var(--surface2);
-border: 1px solid var(--border);
-border-radius: 50%;
-width: 32px; height: 32px;
-display: flex; align-items: center; justify-content: center;
-cursor: pointer;
-color: var(--text-dim);
-font-size: 14px;
-}
+.modal-label { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--accent); }
+.modal-subtitle { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+.modal-close { background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-dim); font-size: 14px; }
 .modal-close:active { background: var(--border); }
-.modal-body {
-flex: 1;
-overflow-y: auto;
-padding: 16px 20px;
--webkit-overflow-scrolling: touch;
-}
-/* BULLET LIST */
+.modal-body { flex: 1; overflow-y: auto; padding: 16px 20px; -webkit-overflow-scrolling: touch; }
 .bullet-list { display: flex; flex-direction: column; gap: 8px; }
-.bullet-row {
-display: flex;
-align-items: center;
-gap: 10px;
-background: var(--surface2);
-border: 1px solid var(--border);
-border-radius: 10px;
-padding: 10px 12px;
-animation: slideIn 0.15s ease;
-}
-@keyframes slideIn {
-from { opacity: 0; transform: translateY(-6px); }
-to { opacity: 1; transform: translateY(0); }
-}
-.bullet-marker {
-width: 6px; height: 6px;
-border-radius: 50%;
-background: var(--accent);
-flex-shrink: 0;
-}
-.bullet-text-input {
-flex: 1;
-background: transparent;
-border: none;
-outline: none;
-color: var(--text);
-font-family: var(--sans);
-font-size: 14px;
-line-height: 1.4;
-resize: none;
-min-height: 20px;
-}
+.bullet-row { display: flex; align-items: center; gap: 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; animation: slideIn 0.15s ease; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+.bullet-marker { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.bullet-text-input { flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-family: var(--sans); font-size: 14px; line-height: 1.4; resize: none; min-height: 20px; }
 .bullet-text-input::placeholder { color: var(--text-dim); }
-.bullet-delete {
-background: none;
-border: none;
-cursor: pointer;
-color: var(--text-dim);
-font-size: 16px;
-padding: 0 2px;
-line-height: 1;
-flex-shrink: 0;
-}
+.bullet-delete { background: none; border: none; cursor: pointer; color: var(--text-dim); font-size: 16px; padding: 0 2px; line-height: 1; flex-shrink: 0; }
 .bullet-delete:active { color: var(--accent2); }
-/* ADD BULLET BTN */
-.add-bullet-btn {
-display: flex;
-align-items: center;
-gap: 8px;
-background: transparent;
-border: 1px dashed var(--border);
-border-radius: 10px;
-padding: 11px 14px;
-color: var(--text-dim);
-font-family: var(--sans);
-font-size: 14px;
-cursor: pointer;
-width: 100%;
-margin-top: 4px;
-transition: all 0.15s;
-}
+.add-bullet-btn { display: flex; align-items: center; gap: 8px; background: transparent; border: 1px dashed var(--border); border-radius: 10px; padding: 11px 14px; color: var(--text-dim); font-family: var(--sans); font-size: 14px; cursor: pointer; width: 100%; margin-top: 4px; transition: all 0.15s; }
 .add-bullet-btn:active { background: var(--surface2); border-color: var(--accent); color: var(--accent); }
-/* FOOTER TOTAL */
-.total-bar {
-position: fixed;
-bottom: 0; left: 0; right: 0;
-background: var(--header-bg);
-border-top: none;
-padding: 12px 20px 28px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-z-index: 100;
-}
+.total-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--header-bg); padding: 12px 20px 28px; display: flex; align-items: center; justify-content: space-between; z-index: 100; }
 .total-label { font-size: 12px; color: rgba(255,255,255,0.55); letter-spacing: 1px; text-transform: uppercase; }
-.total-value { font-family: var(--mono); font-size: 28px; font-weight: 700; color: #ffffff; }
+.total-value { font-family: var(--mono); font-size: 28px; font-weight: 700; color: #fff; }
 .total-right { text-align: right; }
-.total-sessions { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-/* RESET MODAL */
-.confirm-modal {
-position: fixed; inset: 0;
-background: rgba(0,0,0,0.85);
-z-index: 300;
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 20px;
-opacity: 0;
-pointer-events: none;
-transition: opacity 0.15s;
-}
+.confirm-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 300; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.15s; }
 .confirm-modal.open { opacity: 1; pointer-events: all; }
-.confirm-box {
-background: var(--surface);
-border: 1px solid var(--border);
-border-radius: 16px;
-padding: 24px 20px;
-max-width: 320px;
-width: 100%;
-text-align: center;
-color: var(--text);
-}
+.confirm-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px 20px; max-width: 320px; width: 100%; text-align: center; color: var(--text); }
 .confirm-icon { font-size: 36px; margin-bottom: 12px; }
 .confirm-title { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
 .confirm-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 24px; line-height: 1.5; }
 .confirm-btns { display: flex; gap: 10px; }
-.btn-cancel {
-flex: 1;
-background: var(--surface2);
-border: 1px solid var(--border);
-border-radius: 10px;
-padding: 12px;
-color: var(--text);
-font-family: var(--sans);
-font-size: 15px;
-cursor: pointer;
-}
-.btn-confirm {
-flex: 1;
-background: var(--accent2);
-border: none;
-border-radius: 10px;
-padding: 12px;
-color: white;
-font-family: var(--sans);
-font-size: 15px;
-font-weight: 600;
-cursor: pointer;
-}
+.btn-cancel { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; color: var(--text); font-family: var(--sans); font-size: 15px; cursor: pointer; }
+.btn-confirm { flex: 1; background: var(--accent2); border: none; border-radius: 10px; padding: 12px; color: white; font-family: var(--sans); font-size: 15px; font-weight: 600; cursor: pointer; }
 .btn-cancel:active { background: var(--border); }
 .btn-confirm:active { opacity: 0.85; }
-/* SAVED TOAST */
-.toast {
-position: fixed;
-top: 80px; left: 50%;
-transform: translateX(-50%) translateY(-10px);
-background: var(--green);
-color: var(--bg);
-font-size: 12px;
-font-weight: 600;
-letter-spacing: 0.5px;
-padding: 8px 16px;
-border-radius: 20px;
-opacity: 0;
-transition: all 0.2s;
-pointer-events: none;
-z-index: 999;
-white-space: nowrap;
-}
+.toast { position: fixed; top: 80px; left: 50%; transform: translateX(-50%) translateY(-10px); background: var(--green); color: var(--bg); font-size: 12px; font-weight: 600; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 20px; opacity: 0; transition: all 0.2s; pointer-events: none; z-index: 999; white-space: nowrap; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 <div class="header">
-<div class="header-left">
-<div class="header-title">KO Report</div>
-<div class="header-sub">Riunione anomalie</div>
-</div>
-<div class="header-actions">
-<button class="btn-icon" onclick="saveData()" title="Salva">💾</button>
-<button class="btn-icon danger" onclick="openReset()" title="Reset">🗑</button>
-</div>
+  <div class="header-left">
+    <div class="header-title">KO Report</div>
+    <div class="header-sub">Riunione anomalie</div>
+  </div>
+  <div class="header-actions">
+    <button class="btn-icon" onclick="saveData()" title="Salva">💾</button>
+    <button class="btn-icon danger" onclick="openReset()" title="Reset">🗑</button>
+  </div>
 </div>
 <div class="date-strip">
-<span class="date-label">Data</span>
-<span class="dot"></span>
-<span class="date-value" id="dateVal"></span>
-<span class="dot"></span>
-<span class="date-label" id="sessionLabel">Sessione 1</span>
+  <span class="date-label">Data</span>
+  <span class="dot"></span>
+  <span class="date-value" id="dateVal"></span>
+  <span class="dot"></span>
+  <span class="date-label" id="sessionLabel">Sessione 1</span>
 </div>
 <div class="table-head">
-<div class="th">UTE</div>
-<div class="th">KO</div>
-<div class="th">Note riunione</div>
+  <div class="th">UTE</div>
+  <div class="th">KO</div>
+  <div class="th">Note riunione</div>
 </div>
 <div class="rows-container" id="rowsContainer"></div>
 <div class="total-bar">
-<div class="total-label">Totale KO</div>
-<div class="total-right">
-<div class="total-value" id="totalKo">0</div>
-<div class="total-sessions" id="sessionInfo"></div>
+  <div class="total-label">Totale KO</div>
+  <div class="total-right">
+    <div class="total-value" id="totalKo">0</div>
+    <div class="total-sessions" id="sessionInfo"></div>
+  </div>
 </div>
-</div>
+
 <!-- NOTE MODAL -->
 <div class="modal-overlay" id="noteModal">
-<div class="modal">
-<div class="modal-handle"></div>
-<div class="modal-header">
-<div class="modal-title-wrap">
-<div class="modal-label" id="modalLabel">—</div>
-<div class="modal-subtitle">Anomalie da riportare</div>
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <div class="modal-label" id="modalLabel">—</div>
+        <div class="modal-subtitle">Anomalie da riportare</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="bullet-list" id="bulletList"></div>
+      <button class="add-bullet-btn" onclick="addBullet()">
+        <span>＋</span> Aggiungi anomalia
+      </button>
+    </div>
+  </div>
 </div>
-<button class="modal-close" onclick="closeModal()">✕</button>
-</div>
-<div class="modal-body">
-<div class="bullet-list" id="bulletList"></div>
-<button class="add-bullet-btn" onclick="addBullet()">
-<span>＋</span> Aggiungi anomalia
-</button>
-</div>
-</div>
-</div>
+
 <!-- CONFIRM RESET MODAL -->
 <div class="confirm-modal" id="confirmModal">
-<div class="confirm-box">
-<div class="confirm-icon">⚠️</div>
-<div class="confirm-title">Reset completo?</div>
-<div class="confirm-sub">Tutti i KO e le note verranno cancellati. L'operazione non è reversibile.</div>
-<div class="confirm-btns">
-<button class="btn-cancel" onclick="closeReset()">Annulla</button>
-<button class="btn-confirm" onclick="confirmReset()">Reset</button>
+  <div class="confirm-box">
+    <div class="confirm-icon">⚠️</div>
+    <div class="confirm-title">Reset completo?</div>
+    <div class="confirm-sub">Tutti i KO e le note verranno cancellati. L'operazione non è reversibile.</div>
+    <div class="confirm-btns">
+      <button class="btn-cancel" onclick="closeReset()">Annulla</button>
+      <button class="btn-confirm" onclick="confirmReset()">Reset</button>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-<!-- TOAST -->
+
 <div class="toast" id="toast">✓ Salvato</div>
+
 <script>
 const ROWS = ['71','Log','Trim','4','5','7/8','NF','BS'];
 const STORAGE_KEY = 'ko_report_v2';
-let data = {}; // { label: { ko: number, notes: [str] } }
+let data = {};
 let currentRow = null;
+
 function loadData() {
- try {
+  try {
     const raw = localStorage.getItem(STORAGE_KEY);
-   if (raw) data = JSON.parse(raw);
- } catch(e) {}
- ROWS.forEach(r => {
-   if (!data[r]) data[r] = { ko: '', notes: [] };
- });
+    if (raw) data = JSON.parse(raw);
+  } catch(e) {}
+  ROWS.forEach(r => {
+    if (!data[r]) data[r] = { ko: '', notes: [] };
+  });
 }
+
 function saveData(silent = false) {
- localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
- if (!silent) showToast('✓ Salvato');
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  if (!silent) showToast('✓ Salvato');
 }
+
 function showToast(msg) {
- const t = document.getElementById('toast');
- t.textContent = msg;
- t.classList.add('show');
- setTimeout(() => t.classList.remove('show'), 1800);
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
 }
-// DATE
+
 function setDate() {
- const now = new Date();
- const d = now.toLocaleDateString('it-IT', { weekday:'short', day:'2-digit', month:'short', year:'numeric' });
- document.getElementById('dateVal').textContent = d;
+  const now = new Date();
+  const d = now.toLocaleDateString('it-IT', { weekday:'short', day:'2-digit', month:'short', year:'numeric' });
+  document.getElementById('dateVal').textContent = d;
 }
-// RENDER ROWS
+
+// ── FIX 1: aggiorna solo la cella note della riga, senza rifare tutto il DOM ──
+function refreshNoteCell(label) {
+  // data-row può contenere "/" quindi usiamo una ricerca manuale
+  const cells = document.querySelectorAll('.cell-notes');
+  let cell = null;
+  cells.forEach(c => { if (c.getAttribute('data-row') === label) cell = c; });
+  if (!cell) return;
+
+  const notes = data[label].notes;
+  if (notes.length > 0) {
+    cell.innerHTML = `
+      <div class="notes-preview has-notes">
+        ${notes.map(n => `<div class="bullet-item"><span class="bullet-dot"></span>${n || '&nbsp;'}</div>`).join('')}
+      </div>
+      <div class="notes-count">${notes.length}</div>
+    `;
+  } else {
+    cell.innerHTML = `
+      <div class="notes-preview">
+        <div class="add-note-hint"><span>＋</span> Aggiungi note</div>
+      </div>
+    `;
+  }
+}
+
 function renderRows() {
- const container = document.getElementById('rowsContainer');
- container.innerHTML = '';
- ROWS.forEach(label => {
-   const row = document.createElement('div');
-   row.className = 'row-item';
-   // Label
-   const c1 = document.createElement('div');
-   c1.className = 'cell';
-   c1.innerHTML = `<span class="cell-label">${label}</span>`;
-   // KO input
-   const c2 = document.createElement('div');
-   c2.className = 'cell-ko';
-   const inp = document.createElement('input');
-   inp.type = 'number';
-   inp.inputMode = 'numeric';
-   inp.pattern = '[0-9]*';
-   inp.className = 'ko-input';
-   inp.placeholder = '—';
-   inp.value = data[label].ko !== '' ? data[label].ko : '';
-   inp.setAttribute('data-row', label);
-   inp.addEventListener('input', function() {
-     data[label].ko = this.value === '' ? '' : parseInt(this.value) || 0;
-     updateTotal();
-     saveData(true);
-   });
-   c2.appendChild(inp);
-   // Notes
-   const c3 = document.createElement('div');
-   c3.className = 'cell-notes';
-   c3.setAttribute('data-row', label);
-   c3.addEventListener('click', function() {
-     openModal(label);
-   });
-   const notes = data[label].notes;
-   if (notes.length > 0) {
-     c3.innerHTML = `
-       <div class="notes-preview has-notes">
-         ${notes.map(n => `<div class="bullet-item"><span class="bullet-dot"></span>${n}</div>`).join('')}
-       </div>
-       <div class="notes-count">${notes.length}</div>
-     `;
-   } else {
-     c3.innerHTML = `
-       <div class="notes-preview">
-         <div class="add-note-hint"><span>＋</span> Aggiungi note</div>
-       </div>
-     `;
-   }
-   row.appendChild(c1);
-   row.appendChild(c2);
-   row.appendChild(c3);
-   container.appendChild(row);
- });
+  const container = document.getElementById('rowsContainer');
+  container.innerHTML = '';
+  ROWS.forEach(label => {
+    const row = document.createElement('div');
+    row.className = 'row-item';
+
+    // Colonna UTE
+    const c1 = document.createElement('div');
+    c1.className = 'cell';
+    c1.innerHTML = `<span class="cell-label">${label}</span>`;
+
+    // Colonna KO
+    const c2 = document.createElement('div');
+    c2.className = 'cell-ko';
+    const inp = document.createElement('input');
+    inp.type = 'number';
+    inp.inputMode = 'numeric';
+    inp.pattern = '[0-9]*';
+    inp.className = 'ko-input';
+    inp.placeholder = '—';
+    inp.value = data[label].ko !== '' ? data[label].ko : '';
+    inp.setAttribute('data-row', label);
+    inp.addEventListener('input', function() {
+      data[label].ko = this.value === '' ? '' : parseInt(this.value) || 0;
+      updateTotal();
+      saveData(true);
+    });
+    c2.appendChild(inp);
+
+    // Colonna Note
+    const c3 = document.createElement('div');
+    c3.className = 'cell-notes';
+    c3.setAttribute('data-row', label);
+    c3.addEventListener('click', function() { openModal(label); });
+
+    const notes = data[label].notes;
+    if (notes.length > 0) {
+      c3.innerHTML = `
+        <div class="notes-preview has-notes">
+          ${notes.map(n => `<div class="bullet-item"><span class="bullet-dot"></span>${n}</div>`).join('')}
+        </div>
+        <div class="notes-count">${notes.length}</div>
+      `;
+    } else {
+      c3.innerHTML = `
+        <div class="notes-preview">
+          <div class="add-note-hint"><span>＋</span> Aggiungi note</div>
+        </div>
+      `;
+    }
+
+    row.appendChild(c1);
+    row.appendChild(c2);
+    row.appendChild(c3);
+    container.appendChild(row);
+  });
 }
-// TOTAL
+
 function updateTotal() {
- let total = 0;
- ROWS.forEach(r => {
-   total += data[r].ko || 0;
- });
- document.getElementById('totalKo').textContent = total;
+  let total = 0;
+  ROWS.forEach(r => { total += data[r].ko || 0; });
+  document.getElementById('totalKo').textContent = total;
 }
-// MODAL
+
+// ── MODAL ──
 function openModal(row) {
- currentRow = row;
- document.getElementById('modalLabel').textContent = row;
- document.getElementById('noteModal').classList.add('open');
- renderBullets();
+  currentRow = row;
+  document.getElementById('modalLabel').textContent = row;
+  document.getElementById('noteModal').classList.add('open');
+  renderBullets();
 }
+
+// FIX 1 applicato qui: al close aggiorna la cella senza reload
 function closeModal() {
- document.getElementById('noteModal').classList.remove('open');
- currentRow = null;
+  if (currentRow) refreshNoteCell(currentRow);
+  document.getElementById('noteModal').classList.remove('open');
+  currentRow = null;
 }
+
 function renderBullets() {
- const list = document.getElementById('bulletList');
- list.innerHTML = '';
- data[currentRow].notes.forEach((note, i) => {
-   const row = document.createElement('div');
-   row.className = 'bullet-row';
-   row.innerHTML = `
-     <div class="bullet-marker"></div>
-     <div class="bullet-text-input" contenteditable="true" oninput="updateNote(${i}, this.textContent)">${note}</div>
-     <button class="bullet-delete" onclick="deleteNote(${i})">×</button>
-   `;
-   list.appendChild(row);
- });
+  const list = document.getElementById('bulletList');
+  list.innerHTML = '';
+  data[currentRow].notes.forEach((note, i) => {
+    const row = document.createElement('div');
+    row.className = 'bullet-row';
+
+    const marker = document.createElement('div');
+    marker.className = 'bullet-marker';
+
+    const textEl = document.createElement('div');
+    textEl.className = 'bullet-text-input';
+    textEl.contentEditable = 'true';
+    textEl.textContent = note;
+    // Uso closure corretta con addEventListener invece di oninput inline
+    textEl.addEventListener('input', (function(idx) {
+      return function() {
+        data[currentRow].notes[idx] = this.textContent;
+        saveData(true);
+      };
+    })(i));
+
+    const delBtn = document.createElement('button');
+    delBtn.className = 'bullet-delete';
+    delBtn.textContent = '×';
+    delBtn.addEventListener('click', (function(idx) {
+      return function() { deleteNote(idx); };
+    })(i));
+
+    row.appendChild(marker);
+    row.appendChild(textEl);
+    row.appendChild(delBtn);
+    list.appendChild(row);
+  });
 }
+
 function addBullet() {
- data[currentRow].notes.push('');
- renderBullets();
- saveData(true);
- // Focus last
- const inputs = document.querySelectorAll('.bullet-text-input');
- if (inputs.length > 0) {
-   const last = inputs[inputs.length - 1];
-   last.focus();
-   // Place cursor at end
-   const range = document.createRange();
-   range.selectNodeContents(last);
-   range.collapse(false);
-   const sel = window.getSelection();
-   sel.removeAllRanges();
-   sel.addRange(range);
- }
+  data[currentRow].notes.push('');
+  renderBullets();
+  saveData(true);
+  const inputs = document.querySelectorAll('.bullet-text-input');
+  if (inputs.length > 0) {
+    const last = inputs[inputs.length - 1];
+    last.focus();
+    const range = document.createRange();
+    range.selectNodeContents(last);
+    range.collapse(false);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
 }
-function updateNote(i, text) {
- data[currentRow].notes[i] = text;
- saveData(true);
-}
+
 function deleteNote(i) {
- data[currentRow].notes.splice(i, 1);
- renderBullets();
- saveData(true);
+  data[currentRow].notes.splice(i, 1);
+  renderBullets();
+  saveData(true);
 }
-// RESET
+
+// ── FIX 2: reset funzionante ──
 function openReset() {
- document.getElementById('confirmModal').classList.add('open');
+  document.getElementById('confirmModal').classList.add('open');
 }
+
 function closeReset() {
- document.getElementById('confirmModal').classList.remove('open');
+  document.getElementById('confirmModal').classList.remove('open');
 }
+
 function confirmReset() {
- data = {};
- loadData();
- renderRows();
- updateTotal();
- closeReset();
- saveData();
+  data = {};
+  ROWS.forEach(r => { data[r] = { ko: '', notes: [] }; });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  closeReset();
+  renderRows();
+  updateTotal();
+  showToast('✓ Reset effettuato');
 }
+
 // INIT
 loadData();
 setDate();
