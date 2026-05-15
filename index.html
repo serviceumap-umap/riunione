@@ -529,9 +529,9 @@ function copyReport() {
   const ora = now.toLocaleTimeString('it-IT', { hour:'2-digit', minute:'2-digit' });
 
   let lines = [];
-  lines.push('📋 REPORT KO — RIUNIONE ANOMALIE');
+  lines.push(`*📋 REPORT KO — RIUNIONE ANOMALIE*`);
   lines.push(`📅 ${dataStr} — ore ${ora}`);
-  lines.push('─'.repeat(36));
+  lines.push('▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬');
   lines.push('');
 
   let totale = 0;
@@ -541,18 +541,17 @@ function copyReport() {
     const notes = (data[r].notes || []).filter(n => n.trim());
     const koVal = ko !== '' ? ko : '—';
     if (ko !== '' && !isNaN(parseInt(ko))) totale += parseInt(ko);
-    lines.push(`▸ ${r.padEnd(6)}  KO: ${String(koVal).padStart(4)}`);
-    notes.forEach(n => lines.push(`       • ${n}`));
+    lines.push(`▸ *${r}*  →  KO: *${koVal}*`);
+    notes.forEach(n => lines.push(`     • ${n}`));
   });
 
   lines.push('');
-  lines.push('─'.repeat(36));
-  lines.push(`TOTALE KO: ${totale}`);
+  lines.push('▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬');
+  lines.push(`*TOTALE KO: ${totale}*`);
 
-  // Riga BS percentuale
   const bs = data[PCT_ROW];
   if (bs && bs.ko !== '') {
-    lines.push(`BS (Buono Subito): ${bs.ko}%`);
+    lines.push(`*BS (Buono Subito): ${bs.ko}%*`);
   }
 
   lines.push('');
